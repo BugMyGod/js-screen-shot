@@ -81,7 +81,7 @@ export default class ScreenShort {
     mouseX: 0,
     mouseY: 0
   };
-  constructor(options: { enableWebRtc: boolean; completeCallback: Function }) {
+  constructor(options: { enableWebRtc: boolean; completeCallback: Function, containerStyle: Object }) {
     const plugInParameters = new PlugInParameters();
     // webrtc启用状态
     if (
@@ -114,17 +114,20 @@ export default class ScreenShort {
     this.textInputController = this.data.getTextInputController() as HTMLDivElement | null;
     this.optionController = this.data.getOptionController() as HTMLDivElement | null;
     this.optionIcoController = this.data.getOptionIcoController() as HTMLDivElement | null;
-    this.load();
+    this.load(options.containerStyle);
   }
 
   // 加载截图组件
-  private load() {
+  private load(containerStyle) {
     const plugInParameters = new PlugInParameters();
-    // 设置截图区域canvas宽高
-    this.data.setScreenShortInfo(window.innerWidth, window.innerHeight);
-    // 设置截图图片存放容器宽高
-    this.screenShortImageController.width = window.innerWidth;
-    this.screenShortImageController.height = window.innerHeight;
+    // // 设置截图区域canvas宽高
+    // this.data.setScreenShortInfo(window.innerWidth, window.innerHeight);
+    this.data.setScreenShortInfo(containerStyle.width, containerStyle.height);
+    // // 设置截图图片存放容器宽高
+    // this.screenShortImageController.width = window.innerWidth;
+    // this.screenShortImageController.height = window.innerHeight;
+    this.screenShortImageController.width = containerStyle.width;
+    this.screenShortImageController.height = containerStyle.height;
     // 获取截图区域画canvas容器画布
     const context = this.screenShortController?.getContext("2d");
     if (context == null) return;
