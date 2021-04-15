@@ -1,21 +1,23 @@
-# js-web-screen-shot · [![npm](https://img.shields.io/badge/npm-v1.1.2-2081C1)](https://www.npmjs.com/package/js-web-screen-shot) [![yarn](https://img.shields.io/badge/yarn-v1.1.2-F37E42)](https://yarnpkg.com/package/js-web-screen-shot) [![github](https://img.shields.io/badge/GitHub-depositary-9A9A9A)](https://github.com/likaia/js-screen-shot) [![](https://img.shields.io/github/issues/likaia/js-screen-shot)](https://github.com/likaia/js-screen-shot/issues) [![](	https://img.shields.io/github/forks/likaia/js-screen-shot)](``https://github.com/likaia/js-screen-shot/network/members) [![](	https://img.shields.io/github/stars/likaia/js-screen-shot)](https://github.com/likaia/js-screen-shot/stargazers)
-web端自定义截屏插件(原生JS版)，运行视频：[实现web端自定义截屏功能](https://www.bilibili.com/video/BV1Ey4y127cV) ,效果图如下：![截屏效果图](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/486d810877a24582aa8cf110e643c138~tplv-k3u1fbpfcp-watermark.image)
+## 原插件js-web-screen-shot
+#js-web-screen-shot · [![npm](https://img.shields.io/badge/npm-v1.1.2-2081C1)](https://www.npmjs.com/package/js-web-screen-shot) 
 
+## 修改内容
+```
+增加参数containerStyle，targetId
+```
 ## 插件安装
 ```bash
-yarn add js-web-screen-shot
+yarn add js-web-screen-shot2
 
 # or
 
-npm install js-web-screen-shot --save
+npm install js-web-screen-shot2 --save
 ```
 
-## 插件使用
-由于插件采用原生js编写且不依赖任何第三方库，因此它可以在任意一台支持js的设备上运行。
 ### import形式使用插件
 * 在需要使用截屏插件的业务代码中导入插件
 ```javascript
-import ScreenShort from "js-web-screen-shot";
+import ScreenShort from "js-web-screen-shot2";
 ```
 * 在业务代码中使用时实例化插件即可
 ```javascript
@@ -34,7 +36,7 @@ new ScreenShort();
     const callback = (base64) =>{
       console.log(base64);
     }
-    new screenShotPlugin({enableWebRtc: false, completeCallback: callback});
+    new screenShotPlugin({enableWebRtc: false, completeCallback: callback, containerStyle: containerStyle, targetId: id});
 ```
 > ⚠️注意：实例化插件时一定要等dom加载完成，否则插件无法正常工作。
 
@@ -45,6 +47,5 @@ new ScreenShort();
 ```javascript
 sessionStorage.getItem("screenShotImg");
 ```
-
-## 写在最后
-至此，插件的所有使用方法就介绍完了，该插件的Vue3版本，请移步：[vue-web-screen-shot](https://www.npmjs.com/package/vue-web-screen-shot)
+*`containerStyle` 自定义截图范围，值为`Object ==> { width:number, height:number }`
+*`targetId` 自定义截图目标id，值为`String ==> 'id'`

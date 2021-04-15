@@ -1,6 +1,14 @@
+// @media screen and (max-width: 1441px) {
+//   body {
+//     #screenShotContainer{
+//       zoom: 1.3333;
+//     }
+//   }
+//  }
+
 #screenShotContainer {
   position: absolute;
-  top: 0;
+  top: 62px;
   left: 0;
   cursor: crosshair;
 }

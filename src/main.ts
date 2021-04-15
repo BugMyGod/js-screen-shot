@@ -16,7 +16,7 @@ import { drawText } from "@/lib/split-methods/DrawText";
 import { drawRectangle } from "@/lib/split-methods/DrawRectangle";
 import { drawCircle } from "@/lib/split-methods/DrawCircle";
 import { drawLineArrow } from "@/lib/split-methods/DrawLineArrow";
-import { drawMosaic } from "@/lib/split-methods/DrawMosaic";
+// import { drawMosaic } from "@/lib/split-methods/DrawMosaic";
 import { drawCutOutBox } from "@/lib/split-methods/DrawCutOutBox";
 import { zoomCutOutBoxPosition } from "@/lib/common-methords/ZoomCutOutBoxPosition";
 import { saveBorderArrInfo } from "@/lib/common-methords/SaveBorderArrInfo";
@@ -81,7 +81,12 @@ export default class ScreenShort {
     mouseX: 0,
     mouseY: 0
   };
-  constructor(options: { enableWebRtc: boolean; completeCallback: Function, containerStyle: Object }) {
+  constructor(options: {
+    enableWebRtc: boolean;
+    completeCallback: Function;
+    containerStyle: { width: number; height: number };
+    targetId: string;
+  }) {
     const plugInParameters = new PlugInParameters();
     // webrtc启用状态
     if (
@@ -114,18 +119,14 @@ export default class ScreenShort {
     this.textInputController = this.data.getTextInputController() as HTMLDivElement | null;
     this.optionController = this.data.getOptionController() as HTMLDivElement | null;
     this.optionIcoController = this.data.getOptionIcoController() as HTMLDivElement | null;
-    this.load(options.containerStyle);
+    this.load(options.containerStyle, options.targetId);
   }
 
   // 加载截图组件
-  private load(containerStyle) {
+  private load(containerStyle, targetId) {
     const plugInParameters = new PlugInParameters();
-    // // 设置截图区域canvas宽高
-    // this.data.setScreenShortInfo(window.innerWidth, window.innerHeight);
+    // 设置截图区域canvas宽高
     this.data.setScreenShortInfo(containerStyle.width, containerStyle.height);
-    // // 设置截图图片存放容器宽高
-    // this.screenShortImageController.width = window.innerWidth;
-    // this.screenShortImageController.height = window.innerHeight;
     this.screenShortImageController.width = containerStyle.width;
     this.screenShortImageController.height = containerStyle.height;
     // 获取截图区域画canvas容器画布
@@ -143,7 +144,7 @@ export default class ScreenShort {
     this.data.showScreenShortPanel();
     if (!plugInParameters.getWebRtcStatus()) {
       // html2canvas截屏
-      html2canvas(document.body, {}).then(canvas => {
+      html2canvas(document.getElementById(targetId), {}).then(canvas => {
         // 装载截图的dom为null则退出
         if (this.screenShortController == null) return;
 
@@ -402,14 +403,14 @@ export default class ScreenShort {
           );
           break;
         case "mosaicPen":
-          // 绘制马赛克，为了确保鼠标位置在绘制区域中间，所以对x、y坐标进行-10处理
-          drawMosaic(
-            currentX - 10,
-            currentY - 10,
-            this.data.getPenSize(),
-            this.degreeOfBlur,
-            this.screenShortCanvas
-          );
+          // // 绘制马赛克，为了确保鼠标位置在绘制区域中间，所以对x、y坐标进行-10处理
+          // drawMosaic(
+          //   currentX - 10,
+          //   currentY - 10,
+          //   this.data.getPenSize(),
+          //   this.degreeOfBlur,
+          //   this.screenShortCanvas
+          // );
           break;
         default:
           break;

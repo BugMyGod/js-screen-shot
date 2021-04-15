@@ -5,13 +5,14 @@
  * @param y y点坐标
  */
 const getAxisColor = (imgData: ImageData, x: number, y: number) => {
+  console.log('ppp----',  x, y)
   const w = imgData.width;
   const d = imgData.data;
   const color = [];
-  color[0] = d[4 * (y * w + x)];
-  color[1] = d[4 * (y * w + x) + 1];
-  color[2] = d[4 * (y * w + x) + 2];
-  color[3] = d[4 * (y * w + x) + 3];
+  // color[0] = d[4 * (y * w + x)];
+  // color[1] = d[4 * (y * w + x) + 1];
+  // color[2] = d[4 * (y * w + x) + 2];
+  // color[3] = d[4 * (y * w + x) + 3];
   return color;
 };
 
